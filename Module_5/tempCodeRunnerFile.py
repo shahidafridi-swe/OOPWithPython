@@ -1,2 +1,0 @@
-
-shahid = BankAccount("Shahid")
