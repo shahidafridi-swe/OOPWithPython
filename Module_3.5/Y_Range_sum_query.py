@@ -6,4 +6,5 @@ for q in range (Q):
     
     for i in range(L-1,R):
         result += A[i]
+        
     print(result)
