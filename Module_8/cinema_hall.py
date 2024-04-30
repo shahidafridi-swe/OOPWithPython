@@ -10,17 +10,17 @@ class Hall(Star_Cinema):
     def __init__(self,  rows, cols, hall_no) -> None:
         self.__seats = {}
         self.__show_list = []
-        self.rows = rows
-        self.cols = cols
+        self.__rows = rows
+        self.__cols = cols
         self.hall_no = hall_no
 
     def entry_show(self, id, movie_name, time):
         show = (id, movie_name,time)
         self.__show_list.append(show)
         seats = []
-        for i in range(self.rows):
+        for i in range(self.__rows):
             seats.append([])
-            for j in range(self.cols):
+            for j in range(self.__cols):
                 seats[i].append(0)
         self.__seats[id] = seats
     
@@ -34,7 +34,7 @@ class Hall(Star_Cinema):
         else:
             try:
                 quantity = int(input("How many ticket do you want to book: "))
-                if 0 < quantity <=4:
+                if 0 < quantity <=self.__rows*self.__cols:
                     try:
                         for i in range(quantity):
                             print(f"\n------------ No: {i+1} ------------")
@@ -42,7 +42,7 @@ class Hall(Star_Cinema):
 
                             row = int(input("Enter the row: "))
                             col = int(input("Enter the column: "))
-                            if 0 < row <= self.rows and 0 < col <= self.cols:
+                            if 0 < row <= self.__rows and 0 < col <= self.__cols:
                                 if self.__seats[id][row-1][col-1] != 1:
                                     self.__seats[id][row-1][col-1] = 1
                                     print(f"Your selected seat (Row: {row}, Column: {col}) has booked successfully!")
@@ -50,11 +50,11 @@ class Hall(Star_Cinema):
                                 else:
                                     print(f"Your selected seat (Row: {row}, Column: {col}) is already booked. Please Try Another One.")
                             else:
-                                print(f"Please enter the value of row between: 1-{self.rows} and column between: 1-{self.cols}")
+                                print(f"Please enter the value of row between: 1-{self.__rows} and column between: 1-{self.__cols}")
                     except ValueError:
                         print("Please enter the numeric value for row and column")
                 else:
-                    print("Please enter the ticket quantity between 1-4")
+                    print(f"Please enter the ticket quantity between 1-{self.__rows*self.__cols}")
             except ValueError:
                 print("Please enter the numeric value for how many ticket you want")
     
